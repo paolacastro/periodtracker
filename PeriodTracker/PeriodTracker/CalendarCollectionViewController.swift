@@ -11,14 +11,15 @@ import UIKit
 private let reuseIdentifier = "Cell"
 private let cellNibName = "DayCell"
 
-let nums: [String] = ["1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8"]
-
 class CalendarCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    var nums = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        let today = Date()
+        let gen = MonthGenerator()
+        nums = gen.threeMonthArray(for: today)
         self.collectionView!.register(UINib(nibName: cellNibName, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
@@ -38,7 +39,7 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDataSo
     // MARK: UICollectionView Flow Layout Delegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         print(self.collectionView.frame.width/7)
-        return CGSize(width: self.collectionView.frame.width/7, height: self.collectionView.frame.width/7)
+        return CGSize(width: self.collectionView.frame.width/8, height: self.collectionView.frame.width/7)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
@@ -48,13 +49,17 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDataSo
 
      func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return nums.count
+        if section == 0 {
+            return 0
+        } else {
+            return nums.count
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
