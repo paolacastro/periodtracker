@@ -38,7 +38,7 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDataSo
         fetchingMonths = true
         print("fetching More Months")
         collectionView.reloadSections(IndexSet(integer: 1))
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
             let tuple = self.gen.threeMonthArray(for: self.nextDate)
             self.nums += tuple.monthArray
             self.nextDate = tuple.endingDate
@@ -52,7 +52,7 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDataSo
         let contentHeight = scrollView.contentSize.height
         let frameHeight = scrollView.frame.height
         
-        if offsetY > contentHeight - frameHeight {
+        if offsetY > contentHeight - frameHeight * 4 {
             if !fetchingMonths {
                 moreMonths()
             }
