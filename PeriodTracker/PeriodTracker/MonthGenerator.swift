@@ -13,16 +13,18 @@ struct MonthGenerator {
     let weekLength = 7
     let calendar = Calendar.current
     
-    func threeMonthArray(for date:Date) -> [String] {
+    func threeMonthArray(for date:Date) -> (monthArray: [String], endingDate: Date) {
+        var nextDate = Date()
         var monthParty = [String]()
         var counter = 0
-        for _ in 1 ... 12 {
-            let aMonthFromRightNow = calendar.date(byAdding: .month, value: counter, to: date)
-            let month = self.OneMonthArray(for: aMonthFromRightNow!)
+        for _ in 1 ... 2 {
+            nextDate = calendar.date(byAdding: .month, value: counter, to: date)!
+            let month = self.OneMonthArray(for: nextDate)
             monthParty += month
             counter += 1
         }
-        return monthParty
+        nextDate = calendar.date(byAdding: .month, value: counter, to: date)!
+        return (monthArray: monthParty, endingDate: nextDate)
     }
     func OneMonthArray(for date:Date) -> [String] {
         var display = [String]()

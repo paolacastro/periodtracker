@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2F1B9D7324258D18003ADBD4 /* MonthGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1B9D7224258D18003ADBD4 /* MonthGenerator.swift */; };
+		2F396A772426A425004DE8B5 /* LoadingSpinnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F396A752426A425004DE8B5 /* LoadingSpinnerCell.swift */; };
+		2F396A782426A425004DE8B5 /* LoadingSpinnerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F396A762426A425004DE8B5 /* LoadingSpinnerCell.xib */; };
 		2FD9EFEE242028600098662C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD9EFED242028600098662C /* AppDelegate.swift */; };
 		2FD9EFF0242028600098662C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD9EFEF242028600098662C /* SceneDelegate.swift */; };
 		2FD9EFF5242028600098662C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FD9EFF3242028600098662C /* Main.storyboard */; };
@@ -40,6 +42,8 @@
 
 /* Begin PBXFileReference section */
 		2F1B9D7224258D18003ADBD4 /* MonthGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthGenerator.swift; sourceTree = "<group>"; };
+		2F396A752426A425004DE8B5 /* LoadingSpinnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingSpinnerCell.swift; sourceTree = "<group>"; };
+		2F396A762426A425004DE8B5 /* LoadingSpinnerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingSpinnerCell.xib; sourceTree = "<group>"; };
 		2FD9EFEA242028600098662C /* PeriodTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeriodTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FD9EFED242028600098662C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FD9EFEF242028600098662C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,8 +111,10 @@
 		2FD9EFEC242028600098662C /* PeriodTracker */ = {
 			isa = PBXGroup;
 			children = (
-				2FD9F02624213EB30098662C /* DayCell.swift */,
+				2F396A752426A425004DE8B5 /* LoadingSpinnerCell.swift */,
+				2F396A762426A425004DE8B5 /* LoadingSpinnerCell.xib */,
 				2F1B9D7224258D18003ADBD4 /* MonthGenerator.swift */,
+				2FD9F02624213EB30098662C /* DayCell.swift */,
 				2FD9F02724213EB30098662C /* DayCell.xib */,
 				2FD9EFED242028600098662C /* AppDelegate.swift */,
 				2FD9EFEF242028600098662C /* SceneDelegate.swift */,
@@ -246,6 +252,7 @@
 			files = (
 				2FD9EFFD242028610098662C /* LaunchScreen.storyboard in Resources */,
 				2FD9EFFA242028610098662C /* Assets.xcassets in Resources */,
+				2F396A782426A425004DE8B5 /* LoadingSpinnerCell.xib in Resources */,
 				2FD9F02924213EB30098662C /* DayCell.xib in Resources */,
 				2FD9EFF5242028600098662C /* Main.storyboard in Resources */,
 			);
@@ -276,6 +283,7 @@
 				2FD9EFF8242028600098662C /* PeriodTracker.xcdatamodeld in Sources */,
 				2FD9F021242059DE0098662C /* CalendarCollectionViewController.swift in Sources */,
 				2FD9F02824213EB30098662C /* DayCell.swift in Sources */,
+				2F396A772426A425004DE8B5 /* LoadingSpinnerCell.swift in Sources */,
 				2FD9EFEE242028600098662C /* AppDelegate.swift in Sources */,
 				2FD9EFF0242028600098662C /* SceneDelegate.swift in Sources */,
 			);
@@ -451,6 +459,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7BQPUME8AR;
 				INFOPLIST_FILE = PeriodTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -468,6 +477,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7BQPUME8AR;
 				INFOPLIST_FILE = PeriodTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
