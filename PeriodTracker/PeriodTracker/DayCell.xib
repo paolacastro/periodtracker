@@ -20,9 +20,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="29" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GnI-XK-4CK">
-                                <rect key="frame" x="10" y="14.5" width="30" height="21"/>
+                                <rect key="frame" x="5" y="14.5" width="40" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="R5e-Ii-guY"/>
+                                    <constraint firstAttribute="width" constant="40" id="R5e-Ii-guY"/>
                                     <constraint firstAttribute="height" constant="21" id="rPm-YM-HKT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
