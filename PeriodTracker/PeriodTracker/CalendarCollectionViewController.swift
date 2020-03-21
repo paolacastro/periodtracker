@@ -10,25 +10,58 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 private let cellNibName = "DayCell"
+private let spinnerCellNibName = "LoadingSpinnerCell"
+private let spinnerReuseIdentifier = "SpinnerCell"
 
 class CalendarCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    var nums = [String]()
+    var fetchingMonths = false
+    var nextDate = Date()
+    let today = Date()
+    let gen = MonthGenerator()
     
     @IBOutlet weak var collectionView: UICollectionView!
-    var nums = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let today = Date()
-        let gen = MonthGenerator()
-        nums = gen.threeMonthArray(for: today)
+        let tuple = gen.threeMonthArray(for: today)
+        nums = tuple.monthArray
+        nextDate = tuple.endingDate
         self.collectionView!.register(UINib(nibName: cellNibName, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(UINib(nibName: spinnerCellNibName, bundle: nil), forCellWithReuseIdentifier: spinnerReuseIdentifier)
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         
     }
     
+    func moreMonths() {
+        fetchingMonths = true
+        print("fetching More Months")
+        collectionView.reloadSections(IndexSet(integer: 1))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            let tuple = self.gen.threeMonthArray(for: self.nextDate)
+            self.nums += tuple.monthArray
+            self.nextDate = tuple.endingDate
+            self.collectionView.reloadData()
+            self.fetchingMonths = false
+        }
+    }
+    // MARK: Scroll View Delegate
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.height
+        
+        if offsetY > contentHeight - frameHeight {
+            if !fetchingMonths {
+                moreMonths()
+            }
+            
+        }
+    }
+    
     // MARK: UICollectionView Flow Layout Delegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print(self.collectionView.frame.width/7)
         return CGSize(width: self.collectionView.frame.width/8, height: self.collectionView.frame.width/7)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -36,37 +69,30 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDataSo
     }
 
     // MARK: UICollectionViewDataSource
+    func numberOfSections(in: UICollectionView) -> Int {
+        return 2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return nums.count
+        if section == 0 {
+            return nums.count
+            
+        } else if section == 1 && fetchingMonths{
+            return 1
+        }
+        return 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! DayCell
-        
-        cell.dayLabel.text = nums[indexPath.row]        
-    
-        return cell
-    }
 
-    // MARK: UICollectionViewDelegate
-    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
+        if indexPath.section == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! DayCell
+            cell.dayLabel.text = nums[indexPath.row]
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: spinnerReuseIdentifier, for: indexPath) as! LoadingSpinnerCell
+            return cell
+        }
     }
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 
 }
