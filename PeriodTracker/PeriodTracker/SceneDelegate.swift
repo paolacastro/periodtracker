@@ -17,7 +17,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let winScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(windowScene: winScene)
+        rootViewController()
+    }
+    
+    func rootViewController() {
+        window?.rootViewController = mainNavigation()
+        window?.makeKeyAndVisible()
+    }
+    
+    func mainNavigation() -> UITabBarController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let settingsViewController = UIViewController()
+
+        settingsViewController.tabBarItem = UITabBarItem(title: K.Copy.navSettings, image: UIImage(systemName: "person.fill"), tag: 1)
+        
+        let calendarViewController = storyboard.instantiateViewController(withIdentifier: K.calendarVC)
+
+        calendarViewController.tabBarItem = UITabBarItem(title: K.Copy.navCalendar, image: UIImage(systemName: "calendar"), tag: 0)
+
+        let LogViewController = UIViewController()
+
+        LogViewController.tabBarItem = UITabBarItem(title: K.Copy.navLog, image: UIImage(systemName: "pencil.and.ellipsis.rectangle"), tag: 1)
+
+
+        let naviVC = UITabBarController()
+        naviVC.viewControllers = [settingsViewController, calendarViewController, LogViewController]
+        return naviVC
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

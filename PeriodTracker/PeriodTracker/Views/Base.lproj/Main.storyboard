@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NJN-Xp-TOH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,13 +10,13 @@
         <!--Estoy Sangrando-->
         <scene sceneID="Y0L-4Y-97u">
             <objects>
-                <viewController id="00x-oy-Hwy" customClass="CalendarCollectionViewController" customModule="PeriodTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalendarCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="00x-oy-Hwy" customClass="CalendarCollectionViewController" customModule="PeriodTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RkV-Fg-1lJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Go1-AX-TuG" userLabel="Days View">
-                                <rect key="frame" x="10" y="88" width="394" height="40"/>
+                                <rect key="frame" x="10" y="44" width="394" height="40"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="xAV-OD-Y3I">
                                         <rect key="frame" x="0.0" y="10" width="394" height="20.5"/>
@@ -83,7 +83,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DTs-hT-Nsc">
-                                <rect key="frame" x="10" y="128" width="394" height="734"/>
+                                <rect key="frame" x="10" y="84" width="394" height="778"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Aio-Zl-KXY">
                                     <size key="itemSize" width="50" height="50"/>
@@ -118,23 +118,31 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lwB-90-ieC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1840.5797101449277" y="123.88392857142857"/>
+            <point key="canvasLocation" x="964" y="70"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="cXY-PX-q1v">
+        <!--View Controller-->
+        <scene sceneID="KCj-t4-iOs">
             <objects>
-                <navigationController id="NJN-Xp-TOH" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wTq-jW-Hvn">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="00x-oy-Hwy" kind="relationship" relationship="rootViewController" id="ZeZ-t6-SQX"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="heH-up-cd5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="KjC-rj-df4" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eog-wU-QMh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pencil.and.ellipsis.rectangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ezN-td-3r6">
+                                <rect key="frame" x="0.0" y="114" width="414" height="278"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="jRB-On-DT0"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="blb-je-io5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1022" y="124"/>
+            <point key="canvasLocation" x="2021.7391304347827" y="68.973214285714278"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pencil.and.ellipsis.rectangle" catalog="system" width="128" height="81"/>
+    </resources>
 </document>
