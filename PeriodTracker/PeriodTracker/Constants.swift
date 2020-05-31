@@ -10,6 +10,7 @@ import Foundation
 
 struct K {
     static let calendarVC = "CalendarCollectionViewController"
+    static let logVC = "LogViewController"
     
     struct Copy {
         static let navCalendar = "calendar"

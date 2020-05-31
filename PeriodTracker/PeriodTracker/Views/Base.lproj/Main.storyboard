@@ -120,22 +120,52 @@
             </objects>
             <point key="canvasLocation" x="964" y="70"/>
         </scene>
-        <!--View Controller-->
+        <!--Log View Controller-->
         <scene sceneID="KCj-t4-iOs">
             <objects>
-                <viewController id="KjC-rj-df4" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LogViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KjC-rj-df4" customClass="LogViewController" customModule="PeriodTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eog-wU-QMh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pencil.and.ellipsis.rectangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ezN-td-3r6">
-                                <rect key="frame" x="0.0" y="114" width="414" height="278"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencil.and.ellipsis.rectangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ezN-td-3r6">
+                                <rect key="frame" x="0.0" y="114" width="414" height="248.5"/>
+                                <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="6ba-Zv-LhB"/>
+                                </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter first day of period" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6e-yv-KjD">
+                                <rect key="frame" x="0.0" y="364" width="414" height="36"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                <color key="textColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fyg-6H-5m8">
+                                <rect key="frame" x="0.0" y="420" width="414" height="34"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="fyg-6H-5m8" firstAttribute="leading" secondItem="jRB-On-DT0" secondAttribute="leading" id="6Gx-XF-sGb"/>
+                            <constraint firstItem="ezN-td-3r6" firstAttribute="top" secondItem="jRB-On-DT0" secondAttribute="top" constant="70" id="LXQ-Du-BFV"/>
+                            <constraint firstItem="fyg-6H-5m8" firstAttribute="trailing" secondItem="jRB-On-DT0" secondAttribute="trailing" id="MPw-Xu-gfj"/>
+                            <constraint firstItem="ezN-td-3r6" firstAttribute="leading" secondItem="jRB-On-DT0" secondAttribute="leading" id="UEH-bs-UbP"/>
+                            <constraint firstItem="ezN-td-3r6" firstAttribute="trailing" secondItem="jRB-On-DT0" secondAttribute="trailing" id="UF6-Nf-1dp"/>
+                            <constraint firstItem="C6e-yv-KjD" firstAttribute="leading" secondItem="jRB-On-DT0" secondAttribute="leading" id="idb-ta-vCa"/>
+                            <constraint firstItem="jRB-On-DT0" firstAttribute="trailing" secondItem="C6e-yv-KjD" secondAttribute="trailing" id="k3A-xr-uWt"/>
+                            <constraint firstItem="C6e-yv-KjD" firstAttribute="top" secondItem="ezN-td-3r6" secondAttribute="bottom" id="k3C-TF-acW"/>
+                            <constraint firstItem="fyg-6H-5m8" firstAttribute="top" secondItem="C6e-yv-KjD" secondAttribute="bottom" constant="20" id="rMB-iA-vTh"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="jRB-On-DT0"/>
                     </view>
+                    <connections>
+                        <outlet property="instructionLabel" destination="C6e-yv-KjD" id="bPR-dE-ZCu"/>
+                        <outlet property="periodDate" destination="fyg-6H-5m8" id="kPO-er-tNW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="blb-je-io5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
