@@ -38,7 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         calendarViewController.tabBarItem = UITabBarItem(title: K.Copy.navCalendar, image: UIImage(systemName: "calendar"), tag: 0)
 
-        let LogViewController = UIViewController()
+        let LogViewController = storyboard.instantiateViewController(withIdentifier: K.logVC)
 
         LogViewController.tabBarItem = UITabBarItem(title: K.Copy.navLog, image: UIImage(systemName: "pencil.and.ellipsis.rectangle"), tag: 1)
 
