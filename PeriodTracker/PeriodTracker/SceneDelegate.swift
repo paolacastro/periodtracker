@@ -30,21 +30,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func mainNavigation() -> UITabBarController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let settingsViewController = UIViewController()
-
-        settingsViewController.tabBarItem = UITabBarItem(title: K.Copy.navSettings, image: UIImage(systemName: "person.fill"), tag: 1)
+             
         
         let calendarViewController = storyboard.instantiateViewController(withIdentifier: K.calendarVC)
+        let navController = UINavigationController(rootViewController: calendarViewController)
 
-        calendarViewController.tabBarItem = UITabBarItem(title: K.Copy.navCalendar, image: UIImage(systemName: "calendar"), tag: 0)
+        navController.tabBarItem = UITabBarItem(title: K.Copy.navCalendar, image: UIImage(systemName: "calendar"), tag: 1)
 
         let LogViewController = storyboard.instantiateViewController(withIdentifier: K.logVC)
 
-        LogViewController.tabBarItem = UITabBarItem(title: K.Copy.navLog, image: UIImage(systemName: "pencil.and.ellipsis.rectangle"), tag: 1)
+        LogViewController.tabBarItem = UITabBarItem(title: K.Copy.navLog, image: UIImage(systemName: "pencil.and.ellipsis.rectangle"), tag: 2)
+        
+        let settingsViewController = UIViewController()
 
+        settingsViewController.tabBarItem = UITabBarItem(title: K.Copy.navSettings, image: UIImage(systemName: "person.fill"), tag: 3)
 
         let naviVC = UITabBarController()
-        naviVC.viewControllers = [settingsViewController, calendarViewController, LogViewController]
+        naviVC.viewControllers = [navController, LogViewController, settingsViewController]
         return naviVC
     }
 
