@@ -11,10 +11,14 @@ import UIKit
 class DayCell: UICollectionViewCell {
     @IBOutlet weak var background: UIView!
     @IBOutlet weak var dayLabel: UILabel!
+    @IBOutlet weak var circle: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        circle.backgroundColor = .white
+        circle.layer.cornerRadius = 15
+        circle.layer.opacity = 0.3
+        circle.clipsToBounds = true
     }
 
 }

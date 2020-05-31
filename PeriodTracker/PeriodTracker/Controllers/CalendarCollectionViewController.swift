@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 private let reuseIdentifier = "Cell"
 private let cellNibName = "DayCell"
@@ -14,16 +15,25 @@ private let spinnerCellNibName = "LoadingSpinnerCell"
 private let spinnerReuseIdentifier = "SpinnerCell"
 
 class CalendarCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    var nums = [String]()
+    let calendar = Calendar.current
+    var nums = [Any]()
     var fetchingMonths = false
     var nextDate = Date()
     let today = Date()
     let gen = MonthGenerator()
     
+    let realm = try! Realm()
+    
+    var loggedPeriod: PeriodLogEntry?
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        navigationItem.title = "Calendar"
+        
         let tuple = gen.threeMonthArray(for: today)
         nums = tuple.monthArray
         nextDate = tuple.endingDate
@@ -32,33 +42,37 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDataSo
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         
+        if let safeLoggedPeriod = realm.objects(PeriodLogEntry.self).first {
+            loggedPeriod = safeLoggedPeriod
+        }
+        
     }
     
-    func moreMonths() {
-        fetchingMonths = true
-        print("fetching More Months")
-        collectionView.reloadSections(IndexSet(integer: 1))
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-            let tuple = self.gen.threeMonthArray(for: self.nextDate)
-            self.nums += tuple.monthArray
-            self.nextDate = tuple.endingDate
-            self.collectionView.reloadData()
-            self.fetchingMonths = false
-        }
-    }
-    // MARK: Scroll View Delegate
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        let frameHeight = scrollView.frame.height
-        
-        if offsetY > contentHeight - frameHeight * 4 {
-            if !fetchingMonths {
-                moreMonths()
-            }
-            
-        }
-    }
+//    func moreMonths() {
+//        fetchingMonths = true
+//        print("fetching More Months")
+//        collectionView.reloadSections(IndexSet(integer: 1))
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+//            let tuple = self.gen.threeMonthArray(for: self.nextDate)
+//            self.nums += tuple.monthArray
+//            self.nextDate = tuple.endingDate
+//            self.collectionView.reloadData()
+//            self.fetchingMonths = false
+//        }
+//    }
+//    // MARK: Scroll View Delegate
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let offsetY = scrollView.contentOffset.y
+//        let contentHeight = scrollView.contentSize.height
+//        let frameHeight = scrollView.frame.height
+//
+//        if offsetY > contentHeight - frameHeight * 4 {
+//            if !fetchingMonths {
+//                moreMonths()
+//            }
+//
+//        }
+//    }
     
     // MARK: UICollectionView Flow Layout Delegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -70,7 +84,7 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDataSo
 
     // MARK: UICollectionViewDataSource
     func numberOfSections(in: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -87,7 +101,22 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDataSo
 
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! DayCell
-            cell.dayLabel.text = nums[indexPath.row]
+            let label = nums[indexPath.row]
+            if let safeDate = label as? Date {
+                let day = calendar.component(.day, from: safeDate)
+                cell.dayLabel.text = String(day)
+                if calendar.isDate(safeDate, inSameDayAs: loggedPeriod!.date) {
+                    cell.circle.backgroundColor = .red
+                }
+            } else {
+                cell.dayLabel.text = label as! String
+            }
+
+//            if let day = Int(label) {
+//                if day < 6 {
+//                    cell.circle.backgroundColor = .red
+//                }
+//            }
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: spinnerReuseIdentifier, for: indexPath) as! LoadingSpinnerCell
