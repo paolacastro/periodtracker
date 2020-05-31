@@ -1,0 +1,6 @@
+framework module Pods_PeriodTrackerTests {
+  umbrella header "Pods-PeriodTrackerTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
