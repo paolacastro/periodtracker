@@ -87,7 +87,13 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDataSo
 
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! DayCell
-            cell.dayLabel.text = nums[indexPath.row]
+            let label = nums[indexPath.row]
+            cell.dayLabel.text = label
+            if let day = Int(label) {
+                if day < 6 {
+                    cell.circle.backgroundColor = .red
+                }
+            }
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: spinnerReuseIdentifier, for: indexPath) as! LoadingSpinnerCell
