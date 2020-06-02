@@ -14,7 +14,11 @@ private let cellNibName = "DayCell"
 private let spinnerCellNibName = "LoadingSpinnerCell"
 private let spinnerReuseIdentifier = "SpinnerCell"
 
-class CalendarCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class CalendarCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, LogViewControllerDelegate {
+    func didLog() {
+        self.collectionView.reloadData()
+    }
+    
     let calendar = Calendar.current
     var nums = [Any]()
     var fetchingMonths = false
@@ -31,6 +35,9 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let logNav = tabBarController?.viewControllers?[1] as! UINavigationController
+        let logVC = logNav.viewControllers[0] as! LogViewController
+        logVC.delegate = self
         
         navigationItem.title = "Calendar"
         
@@ -47,33 +54,7 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDataSo
         }
         
     }
-    
-//    func moreMonths() {
-//        fetchingMonths = true
-//        print("fetching More Months")
-//        collectionView.reloadSections(IndexSet(integer: 1))
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-//            let tuple = self.gen.threeMonthArray(for: self.nextDate)
-//            self.nums += tuple.monthArray
-//            self.nextDate = tuple.endingDate
-//            self.collectionView.reloadData()
-//            self.fetchingMonths = false
-//        }
-//    }
-//    // MARK: Scroll View Delegate
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let offsetY = scrollView.contentOffset.y
-//        let contentHeight = scrollView.contentSize.height
-//        let frameHeight = scrollView.frame.height
-//
-//        if offsetY > contentHeight - frameHeight * 4 {
-//            if !fetchingMonths {
-//                moreMonths()
-//            }
-//
-//        }
-//    }
-    
+
     // MARK: UICollectionView Flow Layout Delegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.collectionView.frame.width/8, height: self.collectionView.frame.width/7)
@@ -98,30 +79,20 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDataSo
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        if indexPath.section == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! DayCell
-            let label = nums[indexPath.row]
-            if let safeDate = label as? Date {
-                let day = calendar.component(.day, from: safeDate)
-                cell.dayLabel.text = String(day)
-                if calendar.isDate(safeDate, inSameDayAs: loggedPeriod!.date) {
-                    cell.circle.backgroundColor = .red
-                }
-            } else {
-                cell.dayLabel.text = label as! String
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! DayCell
+        let label = nums[indexPath.row]
+        if let safeDate = label as? Date {
+            let day = calendar.component(.day, from: safeDate)
+            cell.dayLabel.text = String(day)
+            if calendar.isDate(safeDate, inSameDayAs: loggedPeriod!.date) {
+                cell.circle.backgroundColor = .red
             }
-
-//            if let day = Int(label) {
-//                if day < 6 {
-//                    cell.circle.backgroundColor = .red
-//                }
-//            }
-            return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: spinnerReuseIdentifier, for: indexPath) as! LoadingSpinnerCell
-            return cell
+            cell.dayLabel.text = label as? String
         }
+        return cell
+
     }
 
 }
