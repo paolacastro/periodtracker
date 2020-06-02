@@ -47,6 +47,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let naviVC = UITabBarController()
         naviVC.viewControllers = [navController, logNavVC, settingsNavVC]
+        naviVC.selectedIndex = 2 // !!!!!
         return naviVC
     }
 

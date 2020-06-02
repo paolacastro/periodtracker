@@ -27,7 +27,6 @@ extension UIView {
         }
         
         if let right = right {
-            print("Padding Right: \(padding.right)")
             trailingAnchor.constraint(equalTo: right, constant: padding.right).isActive = true
         }
         
