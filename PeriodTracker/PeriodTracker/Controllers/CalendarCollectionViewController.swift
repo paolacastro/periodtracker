@@ -14,7 +14,7 @@ private let cellNibName = "DayCell"
 private let spinnerCellNibName = "LoadingSpinnerCell"
 private let spinnerReuseIdentifier = "SpinnerCell"
 
-class CalendarCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, LogViewControllerDelegate {
+class CalendarCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, LogViewControllerDelegate, UIScrollViewDelegate {
     func didLog() {
         self.collectionView.reloadData()
     }
@@ -29,6 +29,7 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDataSo
     let realm = try! Realm()
     
     var loggedPeriod: PeriodLogEntry?
+    var threshold: Int?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -53,12 +54,33 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDataSo
             loggedPeriod = safeLoggedPeriod
         }
         
+        self.threshold = self.nums.count - 60
+    }
+    
+    func fetchNextItems() {
+        let tuple = gen.threeMonthArray(for: nextDate)
+        nums += tuple.monthArray
+        nextDate = tuple.endingDate
     }
 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let visibleIps = self.collectionView.indexPathsForVisibleItems
+        
+        for ip in visibleIps {
+            if ip.row > self.threshold! {
+                fetchNextItems()
+                collectionView.reloadData()
+                self.threshold! += 90
+                return
+            }
+        }
+        
+    }
     // MARK: UICollectionView Flow Layout Delegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.collectionView.frame.width/8, height: self.collectionView.frame.width/7)
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
     }
@@ -69,13 +91,7 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
             return nums.count
-            
-        } else if section == 1 && fetchingMonths{
-            return 1
-        }
-        return 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
