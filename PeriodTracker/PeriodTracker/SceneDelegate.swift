@@ -34,19 +34,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let calendarViewController = storyboard.instantiateViewController(withIdentifier: K.calendarVC)
         let navController = UINavigationController(rootViewController: calendarViewController)
-
         navController.tabBarItem = UITabBarItem(title: K.Copy.navCalendar, image: UIImage(systemName: "calendar"), tag: 1)
 
         let LogViewController = storyboard.instantiateViewController(withIdentifier: K.logVC)
-
-        LogViewController.tabBarItem = UITabBarItem(title: K.Copy.navLog, image: UIImage(systemName: "pencil.and.ellipsis.rectangle"), tag: 2)
+        let logNavVC = UINavigationController(rootViewController: LogViewController)
+        logNavVC.tabBarItem = UITabBarItem(title: K.Copy.navLog, image: UIImage(systemName:
+        "pencil.and.ellipsis.rectangle"), tag: 2)
         
-        let settingsViewController = UIViewController()
-
-        settingsViewController.tabBarItem = UITabBarItem(title: K.Copy.navSettings, image: UIImage(systemName: "person.fill"), tag: 3)
+        let settingsViewController = SettingsViewController()
+        let settingsNavVC = UINavigationController(rootViewController: settingsViewController)
+        settingsNavVC.tabBarItem = UITabBarItem(title: K.Copy.navSettings, image: UIImage(systemName: "person.fill"), tag: 3)
 
         let naviVC = UITabBarController()
-        naviVC.viewControllers = [navController, LogViewController, settingsViewController]
+        naviVC.viewControllers = [navController, logNavVC, settingsNavVC]
+        naviVC.selectedIndex = 2 // !!!!!
         return naviVC
     }
 

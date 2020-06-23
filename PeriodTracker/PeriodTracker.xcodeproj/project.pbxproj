@@ -13,6 +13,9 @@
 		2F8CE35E24835BAE00541E25 /* PeriodLogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8CE35D24835BAE00541E25 /* PeriodLogEntry.swift */; };
 		2FBB1B042482EF8200CEB802 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBB1B032482EF8200CEB802 /* Constants.swift */; };
 		2FBB1B062483037500CEB802 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBB1B052483037500CEB802 /* LogViewController.swift */; };
+		2FC809C52486C329003AB82D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC809C42486C329003AB82D /* SettingsViewController.swift */; };
+		2FC809C72486C40A003AB82D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC809C62486C40A003AB82D /* SettingsView.swift */; };
+		2FC809C92486C94E003AB82D /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC809C82486C94E003AB82D /* extensions.swift */; };
 		2FD9EFEE242028600098662C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD9EFED242028600098662C /* AppDelegate.swift */; };
 		2FD9EFF0242028600098662C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD9EFEF242028600098662C /* SceneDelegate.swift */; };
 		2FD9EFF5242028600098662C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FD9EFF3242028600098662C /* Main.storyboard */; };
@@ -53,6 +56,9 @@
 		2F8CE35D24835BAE00541E25 /* PeriodLogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodLogEntry.swift; sourceTree = "<group>"; };
 		2FBB1B032482EF8200CEB802 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2FBB1B052483037500CEB802 /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		2FC809C42486C329003AB82D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		2FC809C62486C40A003AB82D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2FC809C82486C94E003AB82D /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		2FD9EFEA242028600098662C /* PeriodTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeriodTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FD9EFED242028600098662C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FD9EFEF242028600098662C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +122,7 @@
 				2F396A752426A425004DE8B5 /* LoadingSpinnerCell.swift */,
 				2FD9F02724213EB30098662C /* DayCell.xib */,
 				2FD9F02624213EB30098662C /* DayCell.swift */,
+				2FC809C62486C40A003AB82D /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -125,6 +132,7 @@
 			children = (
 				2FD9F020242059DE0098662C /* CalendarCollectionViewController.swift */,
 				2FBB1B052483037500CEB802 /* LogViewController.swift */,
+				2FC809C42486C329003AB82D /* SettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -136,6 +144,15 @@
 				2F8CE35D24835BAE00541E25 /* PeriodLogEntry.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		2FC809C32486C0F5003AB82D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2FBB1B032482EF8200CEB802 /* Constants.swift */,
+				2FC809C82486C94E003AB82D /* extensions.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		2FD9EFE1242028600098662C = {
@@ -168,9 +185,9 @@
 				2FBB1B022482EE1300CEB802 /* Models */,
 				2FBB1B012482EDF100CEB802 /* Controllers */,
 				2FBB1B002482EDE300CEB802 /* Views */,
+				2FC809C32486C0F5003AB82D /* Helpers */,
 				2FD9EFF9242028610098662C /* Assets.xcassets */,
 				2FD9EFFE242028610098662C /* Info.plist */,
-				2FBB1B032482EF8200CEB802 /* Constants.swift */,
 			);
 			path = PeriodTracker;
 			sourceTree = "<group>";
@@ -460,12 +477,15 @@
 				2F1B9D7324258D18003ADBD4 /* MonthGenerator.swift in Sources */,
 				2FD9F021242059DE0098662C /* CalendarCollectionViewController.swift in Sources */,
 				2F8CE35E24835BAE00541E25 /* PeriodLogEntry.swift in Sources */,
+				2FC809C52486C329003AB82D /* SettingsViewController.swift in Sources */,
 				2FBB1B062483037500CEB802 /* LogViewController.swift in Sources */,
 				2FD9F02824213EB30098662C /* DayCell.swift in Sources */,
 				2F396A772426A425004DE8B5 /* LoadingSpinnerCell.swift in Sources */,
 				2FD9EFEE242028600098662C /* AppDelegate.swift in Sources */,
 				2FD9EFF0242028600098662C /* SceneDelegate.swift in Sources */,
 				2FBB1B042482EF8200CEB802 /* Constants.swift in Sources */,
+				2FC809C72486C40A003AB82D /* SettingsView.swift in Sources */,
+				2FC809C92486C94E003AB82D /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

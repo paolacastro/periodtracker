@@ -9,7 +9,13 @@
 import UIKit
 import RealmSwift
 
+protocol LogViewControllerDelegate {
+    func didLog()
+}
+
 class LogViewController: UIViewController {
+    
+    var delegate: LogViewControllerDelegate?
     
     var realm = try! Realm()
     
@@ -25,6 +31,10 @@ class LogViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save))
+        navigationItem.rightBarButtonItem = saveButton
+        
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .date
         datePicker?.addTarget(self, action: #selector(LogViewController.dateChanged(datePicker:)), for: .valueChanged)
@@ -45,19 +55,13 @@ class LogViewController: UIViewController {
         }
     }
     
-    @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
+    @objc func save() {
         view.endEditing(true)
-    }
-
-    @objc func dateChanged(datePicker: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        displayDateTextField.text = dateFormatter.string(from: datePicker.date)
         
         if let loggedEntry = periodLogEntryObjects!.first {
             do {
                 try realm.write {
-                    loggedEntry.date = datePicker.date
+                    loggedEntry.date = datePicker!.date
                 }
             } catch  {
                 print("saving: \(error)")
@@ -66,7 +70,7 @@ class LogViewController: UIViewController {
         } else {
             // if there hasn't been a period saved
             let newPeriod = PeriodLogEntry()
-            newPeriod.date = datePicker.date
+            newPeriod.date = datePicker!.date
             do {
                 try realm.write {
                     realm.add(newPeriod)
@@ -76,6 +80,24 @@ class LogViewController: UIViewController {
             }
             
         }
+        
+        delegate?.didLog()
+        //        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+        //          let sceneDelegate = windowScene.delegate as? SceneDelegate
+        //        else {
+        //          return
+        //        }
+        //        sceneDelegate.rootViewController()
+    }
+    
+    @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+
+    @objc func dateChanged(datePicker: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        displayDateTextField.text = dateFormatter.string(from: datePicker.date)
         
     }
     
