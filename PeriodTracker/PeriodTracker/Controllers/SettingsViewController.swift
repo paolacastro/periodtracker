@@ -10,6 +10,7 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    let periodLengthOptions = Array(1 ... 31)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,7 @@ class SettingsViewController: UIViewController {
     func setUpView() {
         view.backgroundColor = .white
         
-        [avatarBackgroundView, avatar, cell, periodLengthTitle, periodLengthValue].forEach { (v) in
+        [avatarBackgroundView, avatar, cell, periodLengthTitle, periodLengthValue, periodLengthPicker].forEach { (v) in
             self.view.addSubview(v)
         }
         
@@ -36,6 +37,10 @@ class SettingsViewController: UIViewController {
         
         periodLengthValue.anchor(top: nil, left: nil, bottom: nil, right: cell.trailingAnchor, size: CGSize(width: 60, height: 60), padding: .init(top: 0.0, left: 0.0, bottom: 0.0, right: -15))
         periodLengthValue.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+        
+        periodLengthPicker.anchor(top: cell.bottomAnchor, left: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, right: view.safeAreaLayoutGuide.trailingAnchor)
+        periodLengthPicker.dataSource = self
+        periodLengthPicker.delegate = self
     }
     
     let avatarBackgroundView: UIView = {
@@ -74,6 +79,24 @@ class SettingsViewController: UIViewController {
         view.textAlignment = .right
         return view
     }()
+    
+    let periodLengthPicker: UIPickerView = {
+        let view = UIPickerView()
+        return view
+    }()
 }
 
+extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return periodLengthOptions.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(periodLengthOptions[row])
+    }
+}
 
